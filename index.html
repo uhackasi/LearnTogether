@@ -81,7 +81,7 @@
                         }else{
                             ShowLoggedInComponents();
                             database = firebase.database();
-                            userCondensed = database.ref("userCondensed"+uid);
+                            userCondensed = database.ref("userCondensed/"+uid);
                             userReference = database.ref('users/'+uid);
                             userClasses = database.ref('users/'+uid+"/classes");
                             allClasses = database.ref("classes");
@@ -142,7 +142,6 @@
 //            alert(n);
 
             students = database.ref("classes/"+classes[n]+"/users");
-            var mates;
             students.once('value').then(function(snapshot) {
 //                $("#AppendStudentsHere").append("<tr><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td class='hand'><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
                 console.log(snapshot.val());
