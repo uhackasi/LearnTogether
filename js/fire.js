@@ -17,6 +17,10 @@ signOut = function () {
     });
 };
 
+function TearDown() {
+    $("#SignInModal").hide();
+    
+}
 initApp = function(param) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -26,6 +30,10 @@ initApp = function(param) {
             var uid = user.uid;
 
             console.log(user);
+
+            //Teardown of Login here
+            TearDown();
+
 
             user.getToken().then(function(accessToken) {
                 if(email.indexOf('monash.edu') < 0){
