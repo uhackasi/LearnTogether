@@ -112,7 +112,8 @@
 
         function MyClassesTable(classes){
             for(i=0; i < classes.length; i++){
-                $("#AppendUserClassesHere").append("<tr><td>Alvin</td><td>Eclair</td><td>$0.87</td></tr>");
+                splited = classes[i].split("*");
+                $("#AppendUserClassesHere").append("<tr><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td></tr>");
             }
         }
 
@@ -205,21 +206,6 @@
                 </thead>
 
                 <tbody id="AppendUserClassesHere">
-                <tr>
-                    <td>Alvin</td>
-                    <td>Eclair</td>
-                    <td>$0.87</td>
-                </tr>
-                <tr>
-                    <td>Alan</td>
-                    <td>Jellybean</td>
-                    <td>$3.76</td>
-                </tr>
-                <tr>
-                    <td>Jonathan</td>
-                    <td>Lollipop</td>
-                    <td>$7.00</td>
-                </tr>
                 </tbody>
             </table>
 
