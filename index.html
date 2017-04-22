@@ -75,10 +75,10 @@
                             database = firebase.database();
                             userReference = database.ref('users/'+uid);
 
-                            userReference.put({'op':'1'});
+                            userReference.set({'op':'1'});
 
                             userReference.on('value', function(snapshot) {
-                                console.log(snapshot)
+                                console.log(snapshot.val())
                             });
                         }
                     });
