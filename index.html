@@ -342,13 +342,21 @@
         // page is ready
         $('#calendar').fullCalendar({
             // calendar properties
-            weekends: false,
-            header: {
-//                left: 'prev,next today',
-                center: 'title'
-//                right: 'month,agendaWeek,agendaDay'
-            },
-            defaultView: 'basicWeek'
+//            weekends: false,
+//            header: {
+////                left: 'prev,next today',
+//                center: 'title'
+////                right: 'month,agendaWeek,agendaDay'
+//            },
+//            defaultView: 'basicWeek'
+            header: false,
+            columnFormat: 'dddd',
+            allDaySlot: false,
+            hiddenDays: [0],
+            defaultView: 'agendaWeek',
+            minTime: '07:00:00',
+            maxTime: '21:00:00',
+            editatble: true
         })
     });
 
