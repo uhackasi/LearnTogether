@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 
     <style>
-
+        .hand:hover {
+            cursor: hand;
+        }
     </style>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -131,7 +133,7 @@
             else{
                 for(i=0; i < classes.length; i++){
                     splited = classes[i].split("*");
-                    $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
+                    $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td class='hand'><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
                 }
             }
         }
