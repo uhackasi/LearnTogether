@@ -159,9 +159,9 @@
                         details = database.ref("/users/"+mates[i]);
                         details.on('value',function (userdetails) {
                             allusers = (userdetails.val());
-                            console.log(allusers);
+//                            console.log(allusers);
                         });
-
+                        console.log(allusers);
 //                        $("#AppendStudentsHere").append("<tr><td>" + allusers.mates.name + "</td><td>" + allusers.mates.email + "</td>");
                     }
                 });
