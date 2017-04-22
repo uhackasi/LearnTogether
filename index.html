@@ -80,6 +80,10 @@
                             SignOut();
                         }else{
                             ShowLoggedInComponents();
+
+                            $("#SignOutButton").append(", "+displayName);
+
+
                             database = firebase.database();
 //                            userCondensed = database.ref("userCondensed/"+uid);
                             userReference = database.ref('users/'+uid);
