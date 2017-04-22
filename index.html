@@ -24,7 +24,7 @@
 
 
         var displayName, email, uid;
-        var database, userReference;
+        var database, userReference, userClasses, allClasses;
 
         var config = {
             apiKey: "AIzaSyBLA6sDqXwnMX6tJayM4dmYCPRzt5CW91M",
@@ -74,12 +74,16 @@
                             ShowLoggedInComponents();
                             database = firebase.database();
                             userReference = database.ref('users/'+uid);
+                            userClasses = userReference.ref("/classes");
+                            allClasses = database.ref("classes");
 
-//                            userReference.set({'op':'1'});
-
-                            userReference.on('value', function(snapshot) {
+                            /*userReference.on('value', function(snapshot) {
                                 console.log(snapshot.val())
+                            });*/
+                            userClasses.on('value', function(snapshot) {
+                                classes = (snapshot.val())
                             });
+
                         }
                     });
 
@@ -105,7 +109,9 @@
             tosUrl: '<your-tos-url>'
         };
 
+        function MyClassMatesTable() {
 
+        }
 
 
     </script>
@@ -180,7 +186,37 @@
                 <li class="tab col s3"><a href="#test3">Peers</a></li>
             </ul>
         </div>
-        <div id="test1" class="col s12">Test 1</div>
+        <div id="test1" class="col s12"><br><br>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Item Name</th>
+                    <th>Item Price</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>Alvin</td>
+                    <td>Eclair</td>
+                    <td>$0.87</td>
+                </tr>
+                <tr>
+                    <td>Alan</td>
+                    <td>Jellybean</td>
+                    <td>$3.76</td>
+                </tr>
+                <tr>
+                    <td>Jonathan</td>
+                    <td>Lollipop</td>
+                    <td>$7.00</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
         <div id="test2" class="col s12">Test 2</div>
         <div id="test3" class="col s12">Test 3</div>
     </div>
