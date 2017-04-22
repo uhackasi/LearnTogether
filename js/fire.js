@@ -25,7 +25,7 @@ initApp = function(param) {
             var email = user.email;
             var uid = user.uid;
 
-            console.log(user)
+            console.log(user);
 
             user.getToken().then(function(accessToken) {
                 if(email.indexOf('monash.edu') < 0){
