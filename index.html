@@ -140,6 +140,7 @@
 
 
         function GetClassStudents(n) {
+            currentClass = null;
             students = database.ref("classes/" + classes[n] + "/users");
             students.once('value').then(function (snapshot) {
                 students = database.ref("classes/" + classes[n] + "/users");
@@ -150,9 +151,12 @@
 
 
 
+
+
+
                     for (i = 0; i < mates.length; i++) {
 
-                        details = database.ref("/users/"+mates);
+                        details = database.ref("/users/"+mates[i]);
                         details.on('value',function (userdetails) {
                             allusers = (userdetails.val());
                             console.log(allusers);
