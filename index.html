@@ -125,12 +125,14 @@
         function MyClassesTable(classes){
 
             $("#AppendUserClassesHere").html('');
-            if(classes.length<1){
+            if(classes==null){
                 $("#AppendUserClassesHere").append("<tr><td>Your timetable hasn't been processed yet...</td></tr>");
             }
-            for(i=0; i < classes.length; i++){
-                splited = classes[i].split("*");
-                $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
+            else{
+                for(i=0; i < classes.length; i++){
+                    splited = classes[i].split("*");
+                    $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
+                }
             }
         }
 
