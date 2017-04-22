@@ -163,9 +163,13 @@
                     for (i = 0; i < mates.length; i++) {
 //                        console.log(allusers, mates);
                         console.log( i, mates[i]);
-                        console.log(allusers[mates[i]]);
-//                        $("#AppendStudentsHere").append("<tr><td>" + allusers.mates.name + "</td><td>" + allusers.mates.email + "</td>");
-//                        $("#AppendStudentsHere").append("<tr><td>" + allusers.mates[i].name==null?"Anynomous":allusers.mates[i].name + "</td></tr>");
+//                        console.log();
+                        if(allusers[mates[i]]["name"]!=null)
+                            $("#AppendStudentsHere").append("<tr><td>" + allusers[mates[i]]["name"] + "</td><td>" + "---" + "</td>");
+                        else{
+                            $("#AppendStudentsHere").append("<tr><td>" + "Hiding" + "</td><td>" + "---" + "</td>");
+                        }
+//  $("#AppendStudentsHere").append("<tr><td>" + allusers.mates[i].name==null?"Anynomous":allusers.mates[i].name + "</td></tr>");
 //                        "<td>" + allusers.mates.email + "</td>");
 
                     }
