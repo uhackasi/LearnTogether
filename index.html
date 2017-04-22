@@ -163,10 +163,10 @@
                     for (i = 0; i < mates.length; i++) {
 //                        console.log(allusers, mates);
                         console.log( i, mates[i]);
-//                        console.log();
-                        if(allusers[mates[i]]["name"]!=null)
+                        console.log(allusers[mates[i]]["name"]);
+                        if(allusers[mates[i]]["name"]!=null) {
                             $("#AppendStudentsHere").append("<tr><td>" + allusers[mates[i]]["name"] + "</td><td>" + "---" + "</td>");
-                        else{
+                        }else{
                             $("#AppendStudentsHere").append("<tr><td>" + "Hiding" + "</td><td>" + "---" + "</td>");
                         }
 //  $("#AppendStudentsHere").append("<tr><td>" + allusers.mates[i].name==null?"Anynomous":allusers.mates[i].name + "</td></tr>");
