@@ -111,9 +111,10 @@
         };
 
         function MyClassesTable(classes){
+            $("#AppendUserClassesHere").html('');
             for(i=0; i < classes.length; i++){
                 splited = classes[i].split("*");
-                $("#AppendUserClassesHere").html('').append("<tr><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td></tr>");
+                $("#AppendUserClassesHere").append("<tr><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td></tr>");
             }
         }
 
