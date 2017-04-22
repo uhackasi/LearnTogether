@@ -95,6 +95,13 @@
                                 MyClassesTable(classes);
                             });
 
+                            details = database.ref("users");
+                            details.on('value', function (snapshot) {
+                                allusers = (snapshot.val());
+                                console.log(snapshot);
+//                            console.log(allusers);
+                            });
+
                         }
                     });
 
@@ -156,11 +163,7 @@
 
                     for (i = 0; i < mates.length; i++) {
                         allusers = null;
-                        details = database.ref("/users");
-                        details.once('value').then(function (userdetails) {
-                            allusers = (userdetails.val());
-//                            console.log(allusers);
-                        });
+
                         console.log(allusers);
 //                        $("#AppendStudentsHere").append("<tr><td>" + allusers.mates.name + "</td><td>" + allusers.mates.email + "</td>");
                     }
