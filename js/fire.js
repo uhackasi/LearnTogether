@@ -32,7 +32,7 @@ initApp = function(param) {
                 }else{
                     //redirect
                     if(param!="LoggedIn"){
-                        window.location.href = "https://uhackasi.github.io/LearnTogether/logged.html";
+                        // window.location.href = "https://uhackasi.github.io/LearnTogether/logged.html";
                     }
                 }
             });
