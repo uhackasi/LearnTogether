@@ -60,13 +60,6 @@
         }
 
 
-        /*$("#ALoggedInUsersClasses").on('click','tr',function(e){
-            e.preventDefault();
-            var position = $(this).attr('value');
-
-
-        });*/
-
 
 
         initApp = function(param) {
@@ -147,7 +140,7 @@
 //            alert(n);
 
             students = database.ref("classes/"+classes[n]+"/users");
-            students.on('value', function(snapshot) {
+            students.once('value').then(function(snapshot) {
 //                $("#AppendStudentsHere").append("<tr><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td class='hand'><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
                 console.log(snapshot.val());
             });
