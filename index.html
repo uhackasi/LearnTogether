@@ -76,7 +76,7 @@
                             userReference = database.ref('users/'+uid);
 
                             userReference.on('value', function(snapshot) {
-                                alert(snapshot);
+                                alert(snapshot.val());
                             });
                         }
                     });
