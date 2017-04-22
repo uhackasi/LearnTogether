@@ -41,7 +41,7 @@
 
         function TearDown() {
             console.log("Tearing down");
-            $("#SignInModal").hide();
+            $("#LoginComponents").hide();
 
         }
         initApp = function(param) {
@@ -53,9 +53,6 @@
                     uid = user.uid;
 
                     console.log(user);
-
-                    //Teardown of Login here
-                    TearDown();
 
 
                     user.getToken().then(function(accessToken) {
@@ -128,7 +125,7 @@
     </div>
 </nav>
 
-<div id="all">
+<div id="LoginComponents">
 <div class="section white">
     <div class="row container">
         <h2 class="header">Enhance your learning</h2>
