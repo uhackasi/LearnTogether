@@ -81,12 +81,12 @@
                         }else{
                             ShowLoggedInComponents();
                             database = firebase.database();
-                            userCondensed = database.ref("userCondensed/"+uid);
+//                            userCondensed = database.ref("userCondensed/"+uid);
                             userReference = database.ref('users/'+uid);
                             userClasses = database.ref('users/'+uid+"/classes");
                             allClasses = database.ref("classes");
 
-                            userCondensed.set({name: displayName, email: email});
+//                            userCondensed.set({name: displayName, email: email});
                             /*userReference.on('value', function(snapshot) {
                                 console.log(snapshot.val())
                             });*/
@@ -98,7 +98,12 @@
                             details = database.ref("users");
                             details.on('value', function (snapshot) {
                                 allusers = (snapshot.val());
-                                console.log(snapshot.val());
+                                try{
+                                if(allusers[uid]==null){
+                                    userReference.set({name: displayName, email: email})
+                                }}catch (err){
+                                    userReference.set({name: displayName, email: email})
+                                }
 //                            console.log(allusers);
                             });
 
