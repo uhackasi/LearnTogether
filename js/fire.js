@@ -30,7 +30,7 @@ initApp = function() {
                     signOut();
                 }else{
                     //redirect
-                    window.location.replace("");
+                    window.location.href = "https://uhackasi.github.io/LearnTogether/logged.html";
                 }
             });
 
