@@ -156,8 +156,8 @@
 
                     for (i = 0; i < mates.length; i++) {
                         allusers = null;
-                        details = database.ref("/users/"+mates[i]);
-                        details.on('value',function (userdetails) {
+                        details = database.ref("/userCondensed/"+mates[i]);
+                        details.once('value').then(function (userdetails) {
                             allusers = (userdetails.val());
 //                            console.log(allusers);
                         });
