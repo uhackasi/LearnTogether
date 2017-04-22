@@ -31,8 +31,8 @@
         };
         firebase.initializeApp(config);
 
-        signOut = function () {
-            firebase.auth().signOut().then(function() {
+        SignOut = function () {
+            firebase.auth().SignOut().then(function() {
                 console.log("Signed out forcefully");
             }, function(error) {
                 // An error happened.
@@ -42,6 +42,7 @@
         function TearDown() {
             console.log("Tearing down");
             $("#LoginComponents").hide();
+            $("#SignOutButton").show();
 
         }
         initApp = function(param) {
@@ -58,7 +59,7 @@
                     user.getToken().then(function(accessToken) {
                         if(email.indexOf('monash.edu') < 0){
                             alert("Use monash email");
-                            signOut();
+                            SignOut();
                         }else{
                             //redirect
                             TearDown();
@@ -104,7 +105,7 @@
         <a href="#" class="brand-logo" style="padding-left: 1%">LearnTogether</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="#">About</a></li>
-            <li><a onclick="ToggleShowSignIn()">Sign In</a></li>
+            <li><a style="display: none" id="SignOutButton" onclick="SignOut()">Sign Out</a></li>
             <li>
                 <div class="preloader-wrapper big active" style="display: none">
                     <div class="spinner-layer spinner-blue-only">

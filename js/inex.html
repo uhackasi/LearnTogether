@@ -19,7 +19,7 @@
 <div id="sign-in-status"></div>
 <div id="sign-in"></div>
 <div id="account-details"></div>
-<button onclick="signOut()">Sign out</button>
+<button onclick="SignOut()">Sign out</button>
 
 </body>
 
@@ -68,7 +68,7 @@
 //                    console.log();
                     if(email.indexOf('monash.edu') < 0){
                         alert("Use monash email");
-                        signOut();
+                        SignOut();
                     }
                     document.getElementById('account-details').textContent = JSON.stringify({
                         displayName: displayName,
@@ -92,8 +92,8 @@
         });
     };
 
-    signOut = function () {
-        firebase.auth().signOut().then(function() {
+    SignOut = function () {
+        firebase.auth().SignOut().then(function() {
             console.log("Signed out")
         }, function(error) {
             // An error happened.

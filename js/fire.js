@@ -10,8 +10,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
-signOut = function () {
-    firebase.auth().signOut().then(function() {
+SignOut = function () {
+    firebase.auth().SignOut().then(function() {
         console.log("Signed out");
         window.location.href = "https://uhackasi.github.io/LearnTogether/";
     }, function(error) {
@@ -41,7 +41,7 @@ initApp = function(param) {
             user.getToken().then(function(accessToken) {
                 if(email.indexOf('monash.edu') < 0){
                     alert("Use monash email");
-                    signOut();
+                    SignOut();
                 }else{
                     //redirect
                     TearDown();
