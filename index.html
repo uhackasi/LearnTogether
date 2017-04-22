@@ -336,6 +336,13 @@
         initApp()
     });
 
+    $(document).ready(function() {
+        // page is ready
+        $('#calendar').fullCalendar({
+            // calendar properties
+        })
+    });
+
     // Initialize the FirebaseUI Widget using Firebase.
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
     // The start method will wait until the DOM is loaded.
