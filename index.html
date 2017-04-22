@@ -45,6 +45,11 @@
             $("#SignOutButton").show();
 
         }
+        function ShowLoginComponents() {
+            $("#LoginComponents").show();
+            $("#SignOutButton").hide();
+        }
+
         initApp = function(param) {
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
@@ -69,6 +74,7 @@
                 } else {
                     // User is signed out.
                     console.log("Signed out");
+                    ShowLoginComponents()
                 }
             }, function(error) {
                 console.log(error);
@@ -126,7 +132,7 @@
     </div>
 </nav>
 
-<div id="LoginComponents">
+<div id="LoginComponents" style="display: none">
 <div class="section white">
     <div class="row container">
         <h2 class="header">Enhance your learning</h2>
