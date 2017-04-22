@@ -32,7 +32,7 @@
         firebase.initializeApp(config);
 
         SignOut = function () {
-            firebase.auth().SignOut().then(function() {
+            firebase.auth().signOut().then(function() {
                 console.log("Signed out forcefully");
             }, function(error) {
                 // An error happened.
