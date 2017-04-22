@@ -2,7 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title><!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>LearnTogether</title>
+
+            <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
+            <!-- Compiled and minified CSS -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+            <style>
+
+            </style>
+
+
+        </head>
+<body>
+
+
+<!-- Modal Structure -->
+<div id="SignInModal" class="modal">
+    <div class="modal-content">
+        <h4>Login or Sign Up</h4>
+        <p>Use your Monash email to unlock a whole new learning experience!!</p>
+    </div>
+    <div id="FireBaseUiAuth">
+    </div>
+    <div class="modal-footer">
+        <a onclick="ToggleShowSignIn()" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo" style="padding-left: 1%">LearnTogether</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="#">About</a></li>
+            <li><a onclick="ToggleShowSignIn()">Sign Out</a></li>
+            <li>
+                <div class="preloader-wrapper big active" style="display: none">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+
+
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+</body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
+
+<script src="js/fire.js"></script>
+
+<script>
+
+    window.addEventListener('load', function() {
+        initApp()
+    });
+
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start('#FireBaseUiAuth', uiConfig);
+
+    function ToggleShowSignIn() {
+        $('#SignInModal').toggle()
+    }
+
+</script>
+
+</html></title>
 </head>
 <body>
 
