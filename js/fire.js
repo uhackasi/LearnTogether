@@ -16,7 +16,7 @@ signOut = function () {
     });
 };
 
-initApp = function() {
+initApp = function(param) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
@@ -30,7 +30,9 @@ initApp = function() {
                     signOut();
                 }else{
                     //redirect
-                    window.location.href = "https://uhackasi.github.io/LearnTogether/logged.html";
+                    if(param!="LoggedIn"){
+                        window.location.href = "https://uhackasi.github.io/LearnTogether/logged.html";
+                    }
                 }
             });
 
