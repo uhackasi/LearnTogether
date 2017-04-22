@@ -55,6 +55,15 @@
             $("#SignOutButton").hide();
         }
 
+
+        $("#ALoggedInUsersClasses").on('click','tr',function(e){
+            e.preventDefault();
+            var id = $(this).attr('value');
+            alert(id);
+        });
+
+
+
         initApp = function(param) {
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
@@ -197,7 +206,7 @@
         </div>
         <div id="test1" class="col s12"><br><br>
 
-            <table>
+            <table id="ALoggedInUsersClasses">
                 <thead>
                 <tr>
                     <th>Unit Code</th>
