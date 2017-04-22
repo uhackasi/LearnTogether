@@ -151,7 +151,7 @@
                     details = database.ref("userCondensed/");
                     details.once('value').then(function (userdetails) {
                         allusers = (userdetails.val());
-
+                        console.log(allusers);
                         for (i = 0; i < mates.length; i++) {
                             $("#AppendStudentsHere").append("<tr><td>" + allusers.mates.name + "</td><td>" + allusers.mates.email + "</td>");
                         }
