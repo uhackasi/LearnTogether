@@ -154,23 +154,24 @@
                 students = database.ref("classes/" + classes[n] + "/users");
 
                 students.once('value').then(function (snapshot) {
-                    console.log(snapshot.val());
+//                    console.log(snapshot.val());
                     mates = snapshot.val();
 
-                    console.log(mates);
+//                    console.log(mates);
 
 
+                    for (i = 0; i < mates.length; i++) {
+                        console.log(allusers);
+//                        $("#AppendStudentsHere").append("<tr><td>" + allusers.mates.name + "</td><td>" + allusers.mates.email + "</td>");
+                        $("#AppendStudentsHere").append("<tr><td>" + allusers.mates[i].name==null?"Anynomous":allusers.mates[i].name + "</td></tr>");
+//                        "<td>" + allusers.mates.email + "</td>");
+
+                    }
 
 
 
                 });
-                for (i = 0; i < mates.length; i++) {
-                    console.log(allusers);
-//                        $("#AppendStudentsHere").append("<tr><td>" + allusers.mates.name + "</td><td>" + allusers.mates.email + "</td>");
-                    $("#AppendStudentsHere").append("<tr><td>" + allusers.mates[i].name==null?"Anynomous":allusers.mates[i].name + "</td></tr>");
-//                        "<td>" + allusers.mates.email + "</td>");
 
-                }
 
 
 //            });
