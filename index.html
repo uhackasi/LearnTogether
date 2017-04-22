@@ -80,6 +80,7 @@
                     user.getToken().then(function(accessToken) {
                         if(email.indexOf('monash.edu') < 0){
                             alert("Use monash email");
+                            localStorage.clear();
                             SignOut();
                         }else{
                             ShowLoggedInComponents();
