@@ -24,7 +24,9 @@ initApp = function(param) {
             var displayName = user.displayName;
             var email = user.email;
             var uid = user.uid;
-            
+
+            console.log(user)
+
             user.getToken().then(function(accessToken) {
                 if(email.indexOf('monash.edu') < 0){
                     alert("Use monash email");
