@@ -20,6 +20,7 @@ signOut = function () {
 };
 
 function TearDown() {
+    console.log("Tearing down");
     $("#SignInModal").hide();
 
 }
