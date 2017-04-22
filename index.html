@@ -7,12 +7,21 @@
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
-
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.css' />
     <style>
-
+        .hand:hover {
+            cursor: hand;
+        }
     </style>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+
+
+    <!--<script src='http://code.jquery.com/jquery-1.11.3.min.js'></script>-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.0/fullcalendar.min.js'></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
 
@@ -48,19 +57,15 @@
             console.log("Tearing down");
             $("#LoginComponents").hide();
             $("#SignOutButton").show();
+            $("#SignedInComponents").show();
 
         }
         function ShowLoginComponents() {
             $("#LoginComponents").show();
             $("#SignOutButton").hide();
+            $("#SignedInComponents").hide();
         }
 
-
-        $("#ALoggedInUsersClasses").on('click','tr',function(e){
-            e.preventDefault();
-            var id = $(this).attr('value');
-            alert(id);
-        });
 
 
 
@@ -78,20 +83,37 @@
                     user.getToken().then(function(accessToken) {
                         if(email.indexOf('monash.edu') < 0){
                             alert("Use monash email");
+                            localStorage.clear();
                             SignOut();
                         }else{
                             ShowLoggedInComponents();
+
+                            $("#SignOutButton").append(", "+displayName);
+
+
                             database = firebase.database();
+//                            userCondensed = database.ref("userCondensed/"+uid);
                             userReference = database.ref('users/'+uid);
                             userClasses = database.ref('users/'+uid+"/classes");
                             allClasses = database.ref("classes");
 
+//                            userCondensed.set({name: displayName, email: email});
                             /*userReference.on('value', function(snapshot) {
                                 console.log(snapshot.val())
                             });*/
                             userClasses.on('value', function(snapshot) {
                                 classes = (snapshot.val());
                                 MyClassesTable(classes);
+                            });
+
+                            details = database.ref("users");
+                            details.on('value', function (snapshot) {
+                                allusers = (snapshot.val());
+
+                                database.ref('users/'+uid+"/name").set(displayName);
+                                database.ref('users/'+uid+"/email").set(email);
+
+//                            console.log(allusers);
                             });
 
                         }
@@ -122,9 +144,14 @@
         function MyClassesTable(classes){
 
             $("#AppendUserClassesHere").html('');
-            for(i=0; i < classes.length; i++){
-                splited = classes[i].split("*");
-                $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
+            if(classes==null){
+                $("#AppendUserClassesHere").append("<tr><td>Your timetable hasn't been processed yet...</td></tr>");
+            }
+            else{
+                for(i=0; i < classes.length; i++){
+                    splited = classes[i].split("*");
+                    $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td class='hand'><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
+                }
             }
         }
 
@@ -132,10 +159,57 @@
 
         }
 
-        function GetClassStudents(n) {
-            alert(n);
 
+        function GetClassStudents(n) {
+            mates = null;
+            currentClass = null;
+//            students = database.ref("classes/" + classes[n] + "/users");
+//            students.once('value').then(function (snapshot) {
+                students = database.ref("classes/" + classes[n] + "/users");
+
+            $("#AppendStudentsHere").html('');
+                students.once('value').then(function (snapshot) {
+//                    console.log(snapshot.val());
+                    mates = snapshot.val();
+
+
+
+
+                    for (i = 0; i < mates.length; i++) {
+//                        console.log(allusers, mates);
+
+                        try{
+
+                        if(allusers[mates[i]]["name"]!=null) {
+                            $("#AppendStudentsHere").append("<tr><td>" + allusers[mates[i]]["name"] + "</td><td>" + allusers[mates[i]]["email"] + "</td>");
+                        }else{
+                            $("#AppendStudentsHere").append("<tr><td>" + "Hiding" + "</td><td>" + "---" + "</td>");
+                        }}catch (err){
+                            console.log(err);
+                        }
+//  $("#AppendStudentsHere").append("<tr><td>" + allusers.mates[i].name==null?"Anynomous":allusers.mates[i].name + "</td></tr>");
+//                        "<td>" + allusers.mates.email + "</td>");
+
+                    }
+
+
+
+                });
+
+
+
+//            });
         }
+
+//            alert(n);
+
+
+//            students.once('value').then(function(snapshot) {
+//                $("#AppendStudentsHere").append("<tr><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td class='hand'><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
+
+
+
+
 
 
     </script>
@@ -201,16 +275,17 @@
 </div>
 
 
-<div id="SignedInComponents">
+<div id="SignedInComponents" style="display: none;">
     <div class="row">
-        <div class="col s12">
+        <div class="col s6">
+        <div>
             <ul class="tabs">
                 <li class="tab col s3"><a class="active" href="#test1">My Classes</a></li>
                 <li class="tab col s3"><a href="#test2">Swap Classes</a></li>
                 <li class="tab col s3"><a href="#test3">Peers</a></li>
             </ul>
         </div>
-        <div id="test1" class="col s12"><br><br>
+        <div id="test1"><br><br>
 
             <table id="ALoggedInUsersClasses">
                 <thead>
@@ -224,12 +299,12 @@
                 <tbody id="AppendUserClassesHere">
                 </tbody>
             </table>
-            <table id="AChosenClassStudents">
+            <table id="AChosenClassStudents" >
+                   <!--style="visibility: hidden;">-->
                 <thead>
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Time</th>
                 </tr>
                 </thead>
 
@@ -240,7 +315,14 @@
         </div>
         <div id="test2" class="col s12">Test 2</div>
         <div id="test3" class="col s12">Test 3</div>
+        </div>
+        <div class="col s6">
+            <div id='calendar'></div>
+        </div>
+
     </div>
+
+
 
 
 
@@ -254,6 +336,30 @@
 
     window.addEventListener('load', function() {
         initApp()
+    });
+
+    $(document).ready(function() {
+        // page is ready
+        $('#calendar').fullCalendar({
+            // calendar properties
+//            weekends: false,
+//            header: {
+////                left: 'prev,next today',
+//                center: 'title'
+////                right: 'month,agendaWeek,agendaDay'
+//            },
+//            defaultView: 'basicWeek'
+            header: {
+                center: "All weeks"
+            },
+            columnFormat: 'dddd',
+            allDaySlot: false,
+            hiddenDays: [0],
+            defaultView: 'agendaWeek',
+            minTime: '07:00:00',
+            maxTime: '21:00:00',
+            editatble: true
+        })
     });
 
     // Initialize the FirebaseUI Widget using Firebase.
