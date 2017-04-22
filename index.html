@@ -147,6 +147,7 @@
 
 
         function GetClassStudents(n) {
+            mates = null;
             currentClass = null;
             students = database.ref("classes/" + classes[n] + "/users");
             students.once('value').then(function (snapshot) {
