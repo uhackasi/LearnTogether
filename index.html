@@ -155,7 +155,7 @@
 
 
                     for (i = 0; i < mates.length; i++) {
-
+                        allusers = null;
                         details = database.ref("/users/"+mates[i]);
                         details.on('value',function (userdetails) {
                             allusers = (userdetails.val());
