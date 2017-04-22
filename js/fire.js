@@ -10,7 +10,8 @@ firebase.initializeApp(config);
 
 signOut = function () {
     firebase.auth().signOut().then(function() {
-        console.log("Signed out")
+        console.log("Signed out");
+        window.location.href = "https://uhackasi.github.io/LearnTogether/";
     }, function(error) {
         // An error happened.
     });
