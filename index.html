@@ -74,14 +74,15 @@
                             ShowLoggedInComponents();
                             database = firebase.database();
                             userReference = database.ref('users/'+uid);
-                            userClasses = userReference.ref("/classes");
+                            userClasses = database.ref('users/'+uid+"/classes");
                             allClasses = database.ref("classes");
 
                             /*userReference.on('value', function(snapshot) {
                                 console.log(snapshot.val())
                             });*/
                             userClasses.on('value', function(snapshot) {
-                                classes = (snapshot.val())
+                                classes = (snapshot.val());
+                                MyClassesTable(classes);
                             });
 
                         }
@@ -108,6 +109,12 @@
             // Terms of service url.
             tosUrl: '<your-tos-url>'
         };
+
+        function MyClassesTable(classes){
+            for(i=0; i < classes.length; i++){
+                $("#AppendUserClassesHere").append("<tr><td>Alvin</td><td>Eclair</td><td>$0.87</td></tr>");
+            }
+        }
 
         function MyClassMatesTable() {
 
@@ -197,7 +204,7 @@
                 </tr>
                 </thead>
 
-                <tbody>
+                <tbody id="AppendUserClassesHere">
                 <tr>
                     <td>Alvin</td>
                     <td>Eclair</td>
