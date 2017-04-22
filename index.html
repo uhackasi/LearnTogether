@@ -149,12 +149,14 @@
 
                 details = database.ref("userCondensed/");
                 details.once('value').then(function(userdetails) {
-                    console.log(userdetails.val());
-            });
+                allusers = (userdetails.val());
 
                 for(i=0; i < mates.length; i++){
-
+                    $("#AppendStudentsHere").append("<tr><td>"+allusers.mates.name+"</td><td>"+allusers.mates.email+"</td>";
                 }
+            });
+
+
             });
 
 
@@ -247,7 +249,8 @@
                 <tbody id="AppendUserClassesHere">
                 </tbody>
             </table>
-            <table id="AChosenClassStudents" style="visibility: hidden;">
+            <table id="AChosenClassStudents" >
+                   <!--style="visibility: hidden;">-->
                 <thead>
                 <tr>
                     <th>Name</th>
