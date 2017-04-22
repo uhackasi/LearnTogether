@@ -138,6 +138,7 @@
 
         }
 
+
         function GetClassStudents(n) {
             students = database.ref("classes/" + classes[n] + "/users");
             students.once('value').then(function (snapshot) {
@@ -146,16 +147,22 @@
                 students.once('value').then(function (snapshot) {
                     console.log(snapshot.val());
                     mates = snapshot.val();
+
+
+
+                    for (i = 0; i < mates.length; i++) {
+
+                        details = database.ref("users/"+mates);
+                        details.once('value').then(function (userdetails) {
+                            allusers = (userdetails.val());
+                            console.log(allusers);
+                        });
+
+//                        $("#AppendStudentsHere").append("<tr><td>" + allusers.mates.name + "</td><td>" + allusers.mates.email + "</td>");
+                    }
                 });
 
-                details = database.ref("userCondensed/");
-                details.once('value').then(function (userdetails) {
-                    allusers = (userdetails.val());
-                    console.log(allusers);
-                    /*for (i = 0; i < mates.length; i++) {
-                        $("#AppendStudentsHere").append("<tr><td>" + allusers.mates.name + "</td><td>" + allusers.mates.email + "</td>");
-                    }*/
-                });
+
             });
         }
 
