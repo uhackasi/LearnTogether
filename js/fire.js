@@ -1,3 +1,5 @@
+var displayName, email, uid;
+
 var config = {
     apiKey: "AIzaSyBLA6sDqXwnMX6tJayM4dmYCPRzt5CW91M",
     authDomain: "learntogether-a250b.firebaseapp.com",
@@ -19,15 +21,15 @@ signOut = function () {
 
 function TearDown() {
     $("#SignInModal").hide();
-    
+
 }
 initApp = function(param) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
-            var displayName = user.displayName;
-            var email = user.email;
-            var uid = user.uid;
+            displayName = user.displayName;
+            email = user.email;
+            uid = user.uid;
 
             console.log(user);
 
@@ -49,10 +51,7 @@ initApp = function(param) {
 
         } else {
             // User is signed out.
-            if (param == "LoggedIn") {
-                alert("Not signed in");
-                window.location.href = "https://uhackasi.github.io/LearnTogether/";
-            }
+            console.log("Signed out");
         }
     }, function(error) {
         console.log(error);
