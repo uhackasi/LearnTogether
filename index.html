@@ -20,6 +20,7 @@
 
 
         var displayName, email, uid;
+        var database, userReference;
 
         var config = {
             apiKey: "AIzaSyBLA6sDqXwnMX6tJayM4dmYCPRzt5CW91M",
@@ -39,7 +40,7 @@
             });
         };
 
-        function TearDown() {
+        function ShowLoggedInComponents() {
             console.log("Tearing down");
             $("#LoginComponents").hide();
             $("#SignOutButton").show();
@@ -66,8 +67,11 @@
                             alert("Use monash email");
                             SignOut();
                         }else{
-                            //redirect
-                            TearDown();
+                            ShowLoggedInComponents();
+                            database = firebase.database();
+                            userReference = database.ref('users/'+uid);
+
+                            userReference.set({'me':'op'});
                         }
                     });
 
