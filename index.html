@@ -147,6 +147,11 @@
                 console.log(snapshot.val());
                 mates = snapshot.val();
 
+                details = database.ref("userCondensed/");
+                details.once('value').then(function(userdetails) {
+                    console.log(userdetails.val());
+            });
+
                 for(i=0; i < mates.length; i++){
 
                 }
