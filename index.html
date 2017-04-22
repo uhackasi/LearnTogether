@@ -342,7 +342,13 @@
         // page is ready
         $('#calendar').fullCalendar({
             // calendar properties
-            weekends: false
+            weekends: false,
+            header: {
+//                left: 'prev,next today',
+                center: 'title'
+//                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultView: 'basicWeek'
         })
     });
 
