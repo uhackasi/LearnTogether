@@ -48,11 +48,13 @@
             console.log("Tearing down");
             $("#LoginComponents").hide();
             $("#SignOutButton").show();
+            $("#SignedInComponents").show();
 
         }
         function ShowLoginComponents() {
             $("#LoginComponents").show();
             $("#SignOutButton").hide();
+            $("#SignedInComponents").hide();
         }
 
 
@@ -201,7 +203,7 @@
 </div>
 
 
-<div id="SignedInComponents">
+<div id="SignedInComponents" style="display: none;">
     <div class="row">
         <div class="col s12">
             <ul class="tabs">
