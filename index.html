@@ -153,7 +153,7 @@
                     for (i = 0; i < mates.length; i++) {
 
                         details = database.ref("users/"+mates);
-                        details.on('value').then(function (userdetails) {
+                        details.on('value',function (userdetails) {
                             allusers = (userdetails.val());
                             console.log(allusers);
                         });
