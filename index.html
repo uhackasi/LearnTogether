@@ -16,7 +16,83 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
-    <script src="js/fire.js"></script>
+    <script>
+
+
+        var displayName, email, uid;
+
+        var config = {
+            apiKey: "AIzaSyBLA6sDqXwnMX6tJayM4dmYCPRzt5CW91M",
+            authDomain: "learntogether-a250b.firebaseapp.com",
+            databaseURL: "https://learntogether-a250b.firebaseio.com",
+            projectId: "learntogether-a250b",
+            storageBucket: "learntogether-a250b.appspot.com",
+            messagingSenderId: "3175571907"
+        };
+        firebase.initializeApp(config);
+
+        signOut = function () {
+            firebase.auth().signOut().then(function() {
+                console.log("Signed out forcefully");
+            }, function(error) {
+                // An error happened.
+            });
+        };
+
+        function TearDown() {
+            console.log("Tearing down");
+            $("#SignInModal").hide();
+
+        }
+        initApp = function(param) {
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in.
+                    displayName = user.displayName;
+                    email = user.email;
+                    uid = user.uid;
+
+                    console.log(user);
+
+                    //Teardown of Login here
+                    TearDown();
+
+
+                    user.getToken().then(function(accessToken) {
+                        if(email.indexOf('monash.edu') < 0){
+                            alert("Use monash email");
+                            signOut();
+                        }else{
+                            //redirect
+                            TearDown();
+                        }
+                    });
+
+                } else {
+                    // User is signed out.
+                    console.log("Signed out");
+                }
+            }, function(error) {
+                console.log(error);
+            });
+        };
+
+
+        var uiConfig = {
+            signInSuccessUrl: '.',
+            signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+            // Terms of service url.
+            tosUrl: '<your-tos-url>'
+        };
+
+
+
+
+    </script>
 
 
 </head>
@@ -77,10 +153,6 @@
     </div>
 </div>
 </div>
-
-<!--<div class="parallax-container">
-    <div class="parallax" style=" width: 98%; margin-left: 1%; background-image: url('background2.jpg'); background-size: 100%"></div>
-</div>-->
 
 
 

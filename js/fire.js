@@ -44,9 +44,7 @@ initApp = function(param) {
                     signOut();
                 }else{
                     //redirect
-                    if(param!="LoggedIn"){
-                        // window.location.href = "https://uhackasi.github.io/LearnTogether/logged.html";
-                    }
+                    TearDown();
                 }
             });
 
