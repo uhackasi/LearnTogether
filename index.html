@@ -103,8 +103,8 @@
                             details.on('value', function (snapshot) {
                                 allusers = (snapshot.val());
 
-                                    userReference.ref("name").set(displayName);
-                                userReference.ref("email").set(email);
+                                database.ref('users/'+uid+"/name").set(displayName);
+                                database.ref('users/'+uid+"/email").set(email);
 
 //                            console.log(allusers);
                             });
