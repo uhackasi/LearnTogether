@@ -9,5 +9,7 @@
     <orderEntry type="library" name="materialize" level="application" />
     <orderEntry type="library" name="jquery-3.2.1" level="application" />
     <orderEntry type="library" name="jquery-2.1.1" level="application" />
+    <orderEntry type="library" name="firebase-auth" level="application" />
+    <orderEntry type="library" name="firebase-database" level="application" />
   </component>
 </module>
