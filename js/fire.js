@@ -38,7 +38,10 @@ initApp = function(param) {
 
         } else {
             // User is signed out.
-
+            if (param == "LoggedIn") {
+                alert("Not signed in");
+                window.location.href = "https://uhackasi.github.io/LearnTogether/";
+            }
         }
     }, function(error) {
         console.log(error);
