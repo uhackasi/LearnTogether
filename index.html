@@ -123,7 +123,7 @@
             $("#AppendUserClassesHere").html('');
             for(i=0; i < classes.length; i++){
                 splited = classes[i].split("*");
-                $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td></tr>");
+                $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td><a onclick='GetClassStudents()'>Who is with me?</a> </td></tr>");
             }
         }
 
