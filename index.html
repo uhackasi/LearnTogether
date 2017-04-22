@@ -153,6 +153,7 @@
 //            students.once('value').then(function (snapshot) {
                 students = database.ref("classes/" + classes[n] + "/users");
 
+            $("#AppendStudentsHere").html('');
                 students.once('value').then(function (snapshot) {
 //                    console.log(snapshot.val());
                     mates = snapshot.val();
@@ -162,7 +163,7 @@
 
                     for (i = 0; i < mates.length; i++) {
 //                        console.log(allusers, mates);
-                        $("#AppendStudentsHere").html('');
+
                         try{
 
                         if(allusers[mates[i]]["name"]!=null) {
