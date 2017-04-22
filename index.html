@@ -139,28 +139,37 @@
         }
 
         function GetClassStudents(n) {
+            students = database.ref("classes/" + classes[n] + "/users");
+            students.once('value').then(function (snapshot) {
+                students = database.ref("classes/" + classes[n] + "/users");
+
+                students.once('value').then(function (snapshot) {
+                    console.log(snapshot.val());
+
+                    mates = snapshot.val();
+
+                    details = database.ref("userCondensed/");
+                    details.once('value').then(function (userdetails) {
+                        allusers = (userdetails.val());
+
+                        for (i = 0; i < mates.length; i++) {
+                            $("#AppendStudentsHere").append("<tr><td>" + allusers.mates.name + "</td><td>" + allusers.mates.email + "</td>");
+                        }
+                    });
+
+                });
+            });
+        }
+
 //            alert(n);
 
-            students = database.ref("classes/"+classes[n]+"/users");
-            students.once('value').then(function(snapshot) {
+
+//            students.once('value').then(function(snapshot) {
 //                $("#AppendStudentsHere").append("<tr><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td class='hand'><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
-                console.log(snapshot.val());
-                mates = snapshot.val();
-
-                details = database.ref("userCondensed/");
-                details.once('value').then(function(userdetails) {
-                allusers = (userdetails.val());
-
-                for(i=0; i < mates.length; i++){
-                    $("#AppendStudentsHere").append("<tr><td>"+allusers.mates.name+"</td><td>"+allusers.mates.email+"</td>";
-                }
-            });
 
 
-            });
 
 
-        }
 
 
     </script>
