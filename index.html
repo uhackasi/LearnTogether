@@ -102,12 +102,9 @@
                             details = database.ref("users");
                             details.on('value', function (snapshot) {
                                 allusers = (snapshot.val());
-                                try{
-                                if(allusers[uid]==null){
-                                    userReference.set({name: displayName, email: email})
-                                }}catch (err){
-                                    userReference.set({name: displayName, email: email})
-                                }
+
+                                    userReference.set({name: displayName, email: email});
+
 //                            console.log(allusers);
                             });
 
