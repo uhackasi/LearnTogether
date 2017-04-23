@@ -67,8 +67,40 @@
         }
 
 
+        days = {sun:0, mon:1, tue:2, wed:3, thu:4, fri:5, sat:6};
+
+        function DrawOnCalendar(classes) {
+            console.log(classes);
 
 
+
+            for (i=0; i < classes.length; i++) {
+                classinfo = classes[i].split("*");
+                console.log(classinfo);
+                var newEvent = new Object();
+
+//                console.log(nextSession(new Date(), days[classinfo[2].substring(0,3).toLowerCase()]));
+
+                try {
+                    st = nextSession(new Date(), days[classinfo[2].substring(0,3).toLowerCase()]);
+                    time = classinfo[2].substring(3,classinfo[2].length);
+                    console.log(time);
+                    l = time.split(":");
+                    st.setHours(l[0]);
+                    st.setMinutes(l[1]);
+                    console.log(st);
+                    newEvent.title = classes[i];
+                    newEvent.start = st;
+                    newEvent.end = new Date(st.getTime() + (1*60*60*1000));
+                    newEvent.allDay = false;
+                    $('#calendar').fullCalendar('renderEvent', newEvent, 'stick');
+
+                }catch (err){
+                    console.log(err);
+                }
+            }
+
+        }
         initApp = function(param) {
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
@@ -103,8 +135,8 @@
                             });*/
                             userClasses.on('value', function(snapshot) {
                                 classes = (snapshot.val());
-                                console.log(classes);
                                 MyClassesTable(classes);
+                                DrawOnCalendar(classes);
                             });
 
                             details = database.ref("users");
@@ -378,13 +410,9 @@
             maxTime: '21:00:00',
             editatble: true
         });
-        console.log(calendar);
-        var newEvent = new Object();
+//        console.log(calendar);
 
-        newEvent.title = "some text";
-        newEvent.start = new Date();
-        newEvent.allDay = false;
-        $('#calendar').fullCalendar( 'renderEvent', newEvent, 'stick' );
+
     });
 
     // Initialize the FirebaseUI Widget using Firebase.
