@@ -158,7 +158,9 @@
                         title: 'NEW EVENT',
                         start: new Date()
                     };
-                    $('#calendar').fullCalendar( 'renderEvent', newEvent , 'stick');
+
+                    calendar.fullCalendar('renderEvent', newEvent);
+
 
                     $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td class='hand'><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
                 }
@@ -351,7 +353,8 @@
 
     $(document).ready(function() {
         // page is ready
-        $('#calendar').fullCalendar({
+        calendar = $('#calendar');
+                calendar.fullCalendar({
             // calendar properties
 //            weekends: false,
 //            header: {
