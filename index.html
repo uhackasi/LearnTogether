@@ -153,6 +153,13 @@
             else{
                 for(i=0; i < classes.length; i++){
                     splited = classes[i].split("*");
+
+                    var newEvent = {
+                        title: 'NEW EVENT',
+                        start: new Date()
+                    };
+                    $('#calendar').fullCalendar( 'renderEvent', newEvent , 'stick');
+
                     $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td class='hand'><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
                 }
             }
