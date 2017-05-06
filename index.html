@@ -67,8 +67,40 @@
         }
 
 
+        days = {sun:0, mon:1, tue:2, wed:3, thu:4, fri:5, sat:6};
+
+        function DrawOnCalendar(classes) {
+            console.log(classes);
 
 
+
+            for (i=0; i < classes.length; i++) {
+                classinfo = classes[i].split("*");
+                console.log(classinfo);
+                var newEvent = new Object();
+
+//                console.log(nextSession(new Date(), days[classinfo[2].substring(0,3).toLowerCase()]));
+
+                try {
+                    st = nextSession(new Date(), days[classinfo[2].substring(0,3).toLowerCase()]);
+                    time = classinfo[2].substring(3,classinfo[2].length);
+                    console.log(time);
+                    l = time.split(":");
+                    st.setHours(l[0]);
+                    st.setMinutes(l[1]);
+                    console.log(st);
+                    newEvent.title = classes[i];
+                    newEvent.start = st;
+                    newEvent.end = new Date(st.getTime() + (1*60*60*1000));
+                    newEvent.allDay = false;
+                    $('#calendar').fullCalendar('renderEvent', newEvent, 'stick');
+
+                }catch (err){
+                    console.log(err);
+                }
+            }
+
+        }
         initApp = function(param) {
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
@@ -104,6 +136,7 @@
                             userClasses.on('value', function(snapshot) {
                                 classes = (snapshot.val());
                                 MyClassesTable(classes);
+                                DrawOnCalendar(classes);
                             });
 
                             details = database.ref("users");
@@ -141,16 +174,25 @@
             tosUrl: '<your-tos-url>'
         };
 
+        //Hello
+
         function MyClassesTable(classes){
 
             $("#AppendUserClassesHere").html('');
+
             if(classes==null){
                 $("#AppendUserClassesHere").append("<tr><td>Your timetable hasn't been processed yet...</td></tr>");
             }
             else{
                 for(i=0; i < classes.length; i++){
                     splited = classes[i].split("*");
-                    $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td class='hand'><a onclick='GetClassStudents("+i+")'>Who is with me?</a> </td></tr>");
+
+
+
+//                    calendar.fullCalendar('renderEvent', newEvent);
+
+
+                    $("#AppendUserClassesHere").append("<tr "+"value='"+i+"'><td>"+splited[0]+"</td><td>"+splited[1]+"</td><td>"+splited[2]+"</td><td class='hand'><a onclick='GetClassStudents("+i+")'>My class members?</a> </td></tr>");
                 }
             }
         }
@@ -316,6 +358,7 @@
         <!--<a onclick="ToggleShowSignIn()" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>-->
     </div>
 </div>
+    <br><br><br><br><br><br>
 </div>
 
 
@@ -361,6 +404,7 @@
         <div id="test3" class="col s12">Test 3</div>
         </div>
         <div class="col s6">
+            <br><br>
             <div id='calendar'></div>
         </div>
 
@@ -382,9 +426,16 @@
         initApp()
     });
 
+    function nextSession(date, day) {
+        var ret = new Date(date||new Date());
+        ret.setDate(ret.getDate() + (day - 1 - ret.getDay() + 7) % 7 + 1);
+        return ret;
+    }
+
     $(document).ready(function() {
         // page is ready
-        $('#calendar').fullCalendar({
+        calendar = $('#calendar');
+                calendar.fullCalendar({
             // calendar properties
 //            weekends: false,
 //            header: {
@@ -398,12 +449,15 @@
             },
             columnFormat: 'dddd',
             allDaySlot: false,
-            hiddenDays: [0],
+
             defaultView: 'agendaWeek',
             minTime: '07:00:00',
             maxTime: '21:00:00',
             editatble: true
-        })
+        });
+//        console.log(calendar);
+
+
     });
 
     // Initialize the FirebaseUI Widget using Firebase.
@@ -414,3 +468,4 @@
 </script>
 
 </html>
+<!--Done this all-->
