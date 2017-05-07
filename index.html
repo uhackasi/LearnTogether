@@ -260,6 +260,47 @@
                 e.dataTransfer.dropEffect = 'copy';
             });
 
+
+            var fileInput = document.getElementById('fileInput');
+            fileInput.addEventListener('change', function(e) {
+                var file = fileInput.files[0];
+
+                if(file.size < 2000000) {
+                    var storageRef = firebase.storage().ref();
+                    var mountainImagesRef = storageRef.child('files/'+file.name);
+                    /*mountainImagesRef.put(file).then(function (snapshot) {
+                     console.log('Uploaded a blob or file!');
+                     });*/
+                    task = mountainImagesRef.put(file);
+                    task.on('state_changed', function(snapshot){
+                        // Observe state change events such as progress, pause, and resume
+                        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        document.getElementById('progressbarupload').style.width=""+progress+'%';
+                        console.log('Upload is ' + progress + '% done');
+                        switch (snapshot.state) {
+                            case firebase.storage.TaskState.PAUSED: // or 'paused'
+                                console.log('Upload is paused');
+                                break;
+                            case firebase.storage.TaskState.RUNNING: // or 'running'
+                                console.log('Upload is running');
+                                break;
+                        }
+                    }, function(error) {
+                        // Handle unsuccessful uploads
+                    }, function() {
+                        // Handle successful uploads on complete
+                        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                        var downloadURL = task.snapshot.downloadURL;
+                        console.log(downloadURL);
+                        console.log("Uploaded successfully. ");
+
+                    });
+                }else{
+                    alert("Too big..");
+                }
+            });
+
             // Get file data on drop
             dropZone.addEventListener('drop', function(e) {
                 e.stopPropagation();
@@ -331,7 +372,9 @@
 
 <!-- Modal Structure -->
 
-<div id="dropZone" style="width: 100px; height: 100px; background-color: red"></div>
+<div id="dropZone" style="width: 100px; height: 100px; background-color: red">
+    <input type="file" id="fileInput">
+</div>
 <br><br>
 <div class="progress">
     <div id="progressbarupload" class="determinate" style="width: 0%"></div>
