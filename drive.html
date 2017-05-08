@@ -117,6 +117,31 @@
             }
         });
 
+        function insertPermission(fileId, value, type, role) {
+            console.log("into function...");
+            /*var body = {
+                'value': value,
+                'type': type,
+                'role': role
+            };
+            var request = gapi.client.drive.permissions.insert({
+                'fileId': fileId,
+                'resource': body
+            });
+            request.execute(function(resp) { console.log(resp); });*/
+            request = gapi.client.request({
+                path: '/drive/v2/files/'+fileId+'/permissions',
+                method: 'POST',
+                body: {
+                    role: 'reader',
+                    type: 'anyone'
+                }
+            });
+            request.execute(function (res)  {
+                console.log(res);
+            })
+        }
+
         var fileMetadata = {
             'name' : 'MaxBarrass',
             'mimeType' : 'application/vnd.google-apps.folder'
@@ -126,11 +151,18 @@
             'mimeType':'application/vnd.google-apps.document'
         };
 
+        var id = "";
         gapi.client.drive.files.create({
             resource: googledoc
         }).execute(function(resp, raw_resp) {
+            id = resp.id;
             console.log('Folder Id: ', resp.id, resp);
+            insertPermission(id, "ijos0001@student.monash.edu", "user", "owner");
         });
+
+
+
+
     }
 
 </script>
