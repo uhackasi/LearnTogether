@@ -111,6 +111,7 @@
                 for (var i = 0; i < files.length; i++) {
                     var file = files[i];
                     appendPre(file.name + ' (' + file.id + ')');
+                    console.log(file);
                 }
             } else {
                 appendPre('No files found.');
@@ -133,13 +134,27 @@
                 path: '/drive/v2/files/'+fileId+'/permissions',
                 method: 'POST',
                 body: {
-                    role: 'reader',
-                    type: 'anyone'
+                    value: 'student.monash.edu',
+                    role: 'writer',
+                    type: 'domain'
                 }
 
             });
             request.execute(function (res)  {
                 console.log(res);
+                gapi.client.load('drive', 'v2', function() {
+
+                    var request = gapi.client.request({
+                        'path': '/drive/v2/files',
+                        'method': 'POST',
+                        'body':{
+                            "title" : "cat",
+                            "mimeType" : 'application/vnd.google-apps.drawing'
+                        }
+                    });
+
+                    request.execute(function(resp) { console.log(resp); });
+                });
             })
         }
 
@@ -158,6 +173,9 @@
         }).execute(function(resp, raw_resp) {
             id = resp.id;
             console.log('Folder Id: ', resp.id, resp);
+
+
+
             insertPermission(id, "ijos0001@student.monash.edu", "user", "owner");
         });
 
