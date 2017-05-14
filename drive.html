@@ -101,26 +101,26 @@
      * Print files.
      */
     function listFiles() {
-        gapi.client.drive.files.list({
-            'pageSize': 10,
-            'fields': "nextPageToken, files(id, name)"
-        }).then(function(response) {
-            appendPre('Files:');
-            var files = response.result.files;
-            if (files && files.length > 0) {
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    appendPre(file.name + ' (' + file.id + ')');
-                    console.log(file);
-                }
-            } else {
-                appendPre('No files found.');
-            }
-        });
+//        gapi.client.drive.files.list({
+//            'pageSize': 10,
+//            'fields': "nextPageToken, files(id, name)"
+//        }).then(function(response) {
+//            appendPre('Files:');
+//            var files = response.result.files;
+//            if (files && files.length > 0) {
+//                for (var i = 0; i < files.length; i++) {
+//                    var file = files[i];
+//                    appendPre(file.name + ' (' + file.id + ')');
+//                    console.log(file);
+//                }
+//            } else {
+//                appendPre('No files found.');
+//            }
+//        });
 
-        function insertPermission(fileId, value, type, role) {
+        /*function insertPermission(fileId, value, type, role) {
             console.log("into function...");
-            /*var body = {
+            /!*var body = {
                 'value': value,
                 'type': type,
                 'role': role
@@ -129,7 +129,7 @@
                 'fileId': fileId,
                 'resource': body
             });
-            request.execute(function(resp) { console.log(resp); });*/
+            request.execute(function(resp) { console.log(resp); });*!/
             request = gapi.client.request({
                 path: '/drive/v2/files/'+fileId+'/permissions',
                 method: 'POST',
@@ -154,23 +154,36 @@
                     });
 
                     request.execute(function(resp) { console.log(resp);
+                        request = gapi.client.request({
+                            path: '/drive/v2/files/'+fileId+'/permissions',
+                            method: 'POST',
+                            body: {
+                                value: 'student.monash.edu',
+                                role: 'writer',
+                                type: 'domain'
+                            }
+                        });
+
+                        request.execute(function (resp) {
+                            document.getElementById('calendar').src = loc;
+                        });
 
                     });
                 });
             })
-        }
+        }*/
 
-        var fileMetadata = {
+        /*var fileMetadata = {
             'name' : 'MaxBarrass',
             'mimeType' : 'application/vnd.google-apps.folder'
         };
         var googledoc = {
             'name':'docgoogle',
             'mimeType':'application/vnd.google-apps.document'
-        };
+        };*/
 
-        var id = "";
-        gapi.client.drive.files.create({
+//        var id = "";
+        /*gapi.client.drive.files.create({
             resource: googledoc
         }).execute(function(resp, raw_resp) {
             id = resp.id;
@@ -179,14 +192,90 @@
 
 
             insertPermission(id, "ijos0001@student.monash.edu", "user", "owner");
-        });
+        });*/
+
+        function reloadEmbed(sr){
+            console.log("Every thirty seconds.");
+            document.getElementById('drivedoc').src = sr;
+        }
+
+        function createAndAssignPermission(){
+
+            createdfiledata = null;
+
+            var request = gapi.client.request({
+                'path': '/drive/v2/files',
+                'method': 'POST',
+                'body':{
+                    "title" : "cat",
+                    "mimeType" : 'application/vnd.google-apps.document'
+                }
+            });
+
+            request.execute(function(resp) {
+
+                console.log("File created.");
+                console.log(resp);
+                createdfiledata = resp;
+
+                id = resp.id;
+
+                request = gapi.client.request({
+                    path: '/drive/v2/files/'+id+'/permissions',
+                    method: 'POST',
+                    body: {
+                        value: 'student.monash.edu',
+                        role: 'writer',
+                        type: 'domain'
+                    }
+                });
+
+                request.execute(function (resp) {
+                    console.log("Permission changed");
+                    console.log(resp);
+
+
+                    document.getElementById('drivedoc').src = createdfiledata.embedLink;
+
+                    window.setInterval(function(){reloadEmbed(createdfiledata.embedLink)}, 30000);
+
+                    localStorage.myfilelink = createdfiledata.embedLink;
+                    localStorage.fulllink = createdfiledata.alternateLink;
+
+                    alert("Created file will be opened in a new tab.");
+                    window.open(createdfiledata.alternateLink);
+
+                });
+
+            });
+        }
+
+        if(localStorage.myfilelink==null){
+            createAndAssignPermission();
+        }else{
+            reloadEmbed(localStorage.myfilelink);
+            alert("Opening previous file..");
+            window.open(localStorage.fulllink);
+            window.setInterval(function(){reloadEmbed(localStorage.myfilelink)}, 30000);
+        }
+
 
 
 
 
     }
 
+
+
 </script>
+
+
+
+<iframe id="drivedoc" style="width: 95%; height: 800px" src="">
+<!--https://docs.google.com/drawings/d/1KWdvS8pPUjoaFuB2Hx7OI1Yg5ZXU-Xi2ji6Yq2gpP7A/preview?h=512">-->
+
+</iframe>
+
 
 <script async defer src="https://apis.google.com/js/api.js"
         onload="this.onload=function(){};handleClientLoad()"
