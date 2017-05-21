@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description"
+          content="Upload timetable and find out who's in your class,
+          compare timetable with friends and then take notes combined as a class.">
+    <meta name="keywords" content="Learntogether, Takenotestogether, Collaborate at Monash">
+    <meta name="author" content="Ishan Joshi, Arni Mittal, Surayez Rahman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+    <style>
+        /*
+            Allow so that the theme can be changed :)
+        */
+    </style>
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+
+
+    <title>Learn Together @ Monash</title>
+</head>
+<body>
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" style="padding-left: 1%" class="brand-logo">LearnTogether</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="#" onclick="____TODO____">Login</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="modal_login" class="modal material-boxed">
+    <div class="modal-content">
+        <h4>Login</h4>
+        <p>Use your email given by Monash</p>
+        <div id="firebaseui-auth-container"></div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+
+
+
+
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text"><i>Compare, Connect and Collaborate</i></h5>
+                <div class="row">
+                    <div class="col s3">Facebook</div>
+                    <!--<div class="col s2">Snapchat</div>-->
+                    <div class="col s3">Email</div>
+                    <div class="col s3">Feedback</div>
+                    <div class="col s3">Github</div>
+                    <!--<div class="col s2">Love it</div>-->
+                </div>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Wiki</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Use of Data</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2017 LearnTogether
+            <p>This is in no way affiliated with Monash University</p>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/2.0.0/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.0.0/firebaseui.css" />
+
+<script type="text/javascript">
+    // FirebaseUI config.
+    var config = {
+        apiKey: "AIzaSyBLA6sDqXwnMX6tJayM4dmYCPRzt5CW91M",
+        authDomain: "learntogether-a250b.firebaseapp.com",
+        databaseURL: "https://learntogether-a250b.firebaseio.com",
+        projectId: "learntogether-a250b",
+        storageBucket: "learntogether-a250b.appspot.com",
+        messagingSenderId: "3175571907"
+    };
+    firebase.initializeApp(config);
+
+    var uiConfig = {
+        signInSuccessUrl: '<url-to-redirect-to-on-success>',
+        signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+//            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+//            firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+//            firebase.auth.GithubAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
+//            firebase.auth.PhoneAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        tosUrl: '<your-tos-url>'
+    };
+
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    ui.start('#firebaseui-auth-container', uiConfig);
+</script>
+
+</body>
+</html>
