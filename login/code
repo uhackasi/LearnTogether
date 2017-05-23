@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+
+
+
+
+
+    <div class="row">
+        <div class="col s2">
+            <ul id="slide-out" class="" style="overflow: auto; transform: translateX(0%);">
+                <li>
+                    <div class="userView">
+                        <div class="background">
+                            <img style="max-height: 100%; max-width: 100%" src="background.jpg">
+                        </div>
+                        <!--<a href="#!user"><img class="circle" src="profilepicdefault.png"></a>-->
+                        <a href="#!name"><span class="black-text name">Katie Polus</span></a><br>
+                        <a href="#!email"><span class="black-text email">katie@polus.me</span></a>
+                    </div>
+                </li>
+
+
+
+
+            </ul>
+
+            <ul>
+                <li><a class="subheader">Actions</a></li>
+                <li><a  href="#!"><i class="material-icons">create</i>Edit</a></li>
+                <li><a  href="#!"><i class="material-icons">settings</i>Preferences</a></li>
+                <li><a  href="#!"><i class="material-icons">drafts</i>Contact Us</a></li>
+                <li><a href="#!"><i class="material-icons">help</i>Help</a></li>
+                <li><a href="#!"><i class="material-icons">pets</i>Friends</a></li>
+
+
+
+                <li><a href="#!"><i class="material-icons">close</i>Log off</a></li>
+            </ul>
+        </div>
+        <div class="col s7"></div>
+        <div class="col s3"></div>
+    </div>
+
+
+
+
+
+</body>
+</html>
