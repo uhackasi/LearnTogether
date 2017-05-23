@@ -49,6 +49,11 @@
                 editatble: true
             });
         });
+
+        function tour() {
+            $('.tap-target').tapTarget('open');
+        }
+
     </script>
 
     <style>
@@ -71,7 +76,7 @@
 
 
 
-<nav>
+<nav class="grey">
     <ul id="slide-out" class="side-nav fixed">
         <li>
             <div class="userView">
@@ -89,22 +94,65 @@
         <li><a href="#"><i class="material-icons">create</i>Edit</a></li>
         <li><a href="#"><i class="material-icons">settings</i>Preferences</a></li>
         <li><a href="#"><i class="material-icons">drafts</i>Contact Us</a></li>
-        <li><a href="#"><i class="material-icons">help</i>Help</a></li>
+        <li><a onclick="tour()" href="#"><i class="material-icons">help</i>Help</a></li>
         <li><a href="#"><i class="material-icons">pets</i>Friends <span class="badge">1</span> </a></li>
 
         <li><div class="divider"></div></li>
 
         <li><a href="#!"><i class="material-icons">close</i>Log off</a></li>
     </ul>
-    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+    <a href="#" style="width: 10%" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 </nav>
 
 <main>
     <div class="row">
         <div class="col s9">
             <div id='calendar'></div>
+            <br>
+            <div class="row">
+                <div class="col s2">
+                    <p>
+                        <input type="checkbox" id="p1" />
+                        <label for="p1">Red</label>
+                    </p>
+                </div>
+                <div class="col s2">
+                    <p>
+                        <input type="checkbox" id="p2" />
+                        <label for="p2">Red</label>
+                    </p>
+                </div>
+                <div class="col s2">
+                    <p>
+                        <input type="checkbox" id="p3" />
+                        <label for="p3">Red</label>
+                    </p>
+                </div>
+                <div class="col s2">
+                    <p>
+                        <input type="checkbox" id="p4" />
+                        <label for="p4">Red</label>
+                    </p>
+                </div>
+                <div class="col s2">
+                    <p>
+                        <input type="checkbox" id="p5" />
+                        <label for="p5">Red</label>
+                    </p>
+                </div>
+                <div class="col s2">
+                    <a id="add" class="btn-floating btn-large waves-effect waves-light pulse red"><i class="material-icons">add</i></a>
+                </div>
+
+            </div>
         </div>
         <div class="col s3">This div is 6-columns wide</div>
+    </div>
+    <div class="tap-target" data-activates="add">
+        <div class="tap-target-content">
+            <h5>Title</h5>
+            <p>A bunch of text</p>
+        </div>
     </div>
 </main>
 
