@@ -34,21 +34,38 @@
             );
             $('.collapsible').collapsible();
 
+            $('input.autocomplete').autocomplete({
+                data: {
+                    "Apple": null,
+                    "Microsoft": null,
+                    "Google": 'http://placehold.it/250x250'
+                },
+                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                    // Callback function when value is autcompleted.
+                },
+                minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+            });
+
             calendar = $('#calendar');
             calendar.fullCalendar({
                 header: {
                     center: "All weeks"
                 },
-                height: 650,
+                height: 700,
                 columnFormat: 'ddd',
                 allDaySlot: false,
 
                 defaultView: 'agendaWeek',
                 minTime: '07:00:00',
-                maxTime: '20:00:00',
+                maxTime: '22:00:00',
                 editatble: true
             });
+
+
         });
+
+
 
         function tour() {
             $('.tap-target').tapTarget('open');
@@ -61,7 +78,7 @@
             padding-left: 300px;
         }
         main, footer {
-            padding-top: 2%;
+            padding-top: 0%;
         }
 
         @media only screen and (max-width : 992px) {
@@ -76,7 +93,7 @@
 
 
 
-<nav class="grey">
+<!--<nav class="black lighten-3">-->
     <ul id="slide-out" class="side-nav fixed">
         <li>
             <div class="userView">
@@ -85,7 +102,7 @@
                 </div>
                 <a href="#!user"><img class="circle" src="profilepicdefault.png"></a>
                 <a href="#!name"><span class="black-text name">Katie Polus</span></a>
-                <a href="#!email"><span class="black-text email">katie@polus.me</span></a>
+                <a href="#!email"><span class="black-text email">kpol0001@student.monash.edu</span></a>
             </div>
         </li>
 
@@ -101,43 +118,44 @@
 
         <li><a href="#!"><i class="material-icons">close</i>Log off</a></li>
     </ul>
-    <a href="#" style="width: 10%" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-</nav>
+    <a href="#" data-activates="slide-out" class="button-collapse"><img src="menuicon.png" style="width: 50px"> </a>
+
 
 <main>
     <div class="row">
-        <div class="col s9">
+        <div class="col s8">
+            <p>My calendar can be accessed by unique code <strong>A352J</strong></p>
             <div id='calendar'></div>
             <br>
             <div class="row">
                 <div class="col s2">
                     <p>
                         <input type="checkbox" id="p1" />
-                        <label for="p1">Red</label>
+                        <label for="p1">Ishan</label>
                     </p>
                 </div>
                 <div class="col s2">
                     <p>
                         <input type="checkbox" id="p2" />
-                        <label for="p2">Red</label>
+                        <label for="p2">Laura</label>
                     </p>
                 </div>
                 <div class="col s2">
                     <p>
                         <input type="checkbox" id="p3" />
-                        <label for="p3">Red</label>
+                        <label for="p3">Surayez</label>
                     </p>
                 </div>
                 <div class="col s2">
                     <p>
                         <input type="checkbox" id="p4" />
-                        <label for="p4">Red</label>
+                        <label for="p4">Arni</label>
                     </p>
                 </div>
                 <div class="col s2">
                     <p>
                         <input type="checkbox" id="p5" />
-                        <label for="p5">Red</label>
+                        <label for="p5">Spare time</label>
                     </p>
                 </div>
                 <div class="col s2">
@@ -146,7 +164,63 @@
 
             </div>
         </div>
-        <div class="col s3">This div is 6-columns wide</div>
+        <div class="col s4">
+            <!--<h3>Information</h3>-->
+            <!--<p>Time: __________________</p>-->
+            <!--<p>Activity Details: _________________</p>-->
+
+            <h5>Who's with me?</h5>
+            <a href="#">Connect to facebook?</a>
+            <div class="row">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">search</i>
+                            <input type="text" id="autocomplete-input" class="autocomplete">
+                            <label for="autocomplete-input">Autocomplete</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="collection">
+                <li class="collection-item avatar">
+                    <i class="material-icons circle">person</i>
+                    <span class="title">Ishan Joshi</span>
+                    <p>
+                        ijos0001
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                </li>
+                <li class="collection-item avatar">
+                    <i class="material-icons circle">person</i>
+                    <span class="title">Ishan Joshi</span>
+                    <p>
+                        ijos0001
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                </li>
+                <li class="collection-item avatar">
+                    <i class="material-icons circle">person</i>
+                    <span class="title">Ishan Joshi</span>
+                    <p>
+                        ijos0001
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                </li>
+                <li class="collection-item avatar">
+                    <i class="material-icons circle">person</i>
+                    <span class="title">Ishan Joshi</span>
+                    <p>
+                        ijos0001
+                    </p>
+                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                </li>
+
+
+            </ul>
+            <p style="text-align: center">See more...</p>
+        </div>
     </div>
     <div class="tap-target" data-activates="add">
         <div class="tap-target-content">
